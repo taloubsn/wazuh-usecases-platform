@@ -1,0 +1,17 @@
+# Minimal FastAPI setup for quick testing
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+
+# Database essentials
+sqlalchemy
+psycopg2-binary
+alembic
+
+# Basic data validation
+pydantic
+pydantic-settings
+
+# HTTP client
+httpx

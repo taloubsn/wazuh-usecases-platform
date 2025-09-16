@@ -1,0 +1,1 @@
+# Wazuh Use Cases & Playbooks Platform - Backend Application
