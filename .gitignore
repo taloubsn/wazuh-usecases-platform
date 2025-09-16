@@ -114,3 +114,39 @@ alembic.ini
 
 # Local development
 docker-compose.override.yml
+
+# Development and documentation files not needed for users
+PROMPT/
+amélioration/
+docs/
+.claude/
+simple_backend.py
+start_platform.sh
+TROUBLESHOOTING.md
+QUICK_START.md
+docker-compose.minimal.yml
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# Vite cache
+.vite/
+
+# Yarn lock files (we use npm)
+yarn.lock
+
+# Production builds
+build/
+dist/
