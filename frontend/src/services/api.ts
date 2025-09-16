@@ -34,6 +34,13 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     console.error('API Error:', error);
+
+    // Handle network errors gracefully
+    if (!error.response) {
+      console.warn('Network error or server unavailable');
+      return Promise.reject(new Error('Server unavailable'));
+    }
+
     return Promise.reject(error);
   }
 );

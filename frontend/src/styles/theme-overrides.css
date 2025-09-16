@@ -1,0 +1,86 @@
+/* Ajustements pour le mode clair */
+[data-theme="light"] .app-sidebar .ant-menu-dark {
+  background: var(--bg-container) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .app-sidebar .ant-menu-dark .ant-menu-item {
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .app-sidebar .ant-menu-dark .ant-menu-item:hover {
+  background-color: var(--bg-light) !important;
+  color: var(--primary) !important;
+}
+
+[data-theme="light"] .app-sidebar .ant-menu-dark .ant-menu-item-selected {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+[data-theme="light"] .app-header {
+  background: var(--bg-container) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .app-content {
+  background: var(--bg-base) !important;
+  color: var(--text) !important;
+}
+
+/* Corrections pour les cards en mode clair */
+[data-theme="light"] .ant-card {
+  background: var(--bg-container) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .ant-card-head {
+  background: var(--bg-light) !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* Corrections pour les inputs en mode clair */
+[data-theme="light"] .ant-input {
+  background: var(--bg-container) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .ant-input:focus,
+[data-theme="light"] .ant-input:hover {
+  border-color: var(--primary) !important;
+}
+
+/* Corrections pour les boutons en mode clair */
+[data-theme="light"] .ant-btn {
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="light"] .ant-btn:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+/* Tables en mode clair */
+[data-theme="light"] .ant-table {
+  background: var(--bg-container) !important;
+}
+
+[data-theme="light"] .ant-table-thead > tr > th {
+  background: var(--bg-light) !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+[data-theme="light"] .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .ant-table-tbody > tr:hover > td {
+  background: var(--bg-light) !important;
+}

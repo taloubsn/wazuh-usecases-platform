@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Layout as AntLayout, Menu, Button, Avatar, Dropdown, Input, Badge } from 'antd';
+import { Layout as AntLayout, Menu, Button, Avatar, Dropdown, Input, Badge, message } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useQuery } from '@tanstack/react-query';
 import {
   DashboardOutlined,
@@ -16,6 +18,8 @@ import {
   PlusOutlined,
   BellOutlined,
   SafetyOutlined,
+  BulbOutlined,
+  BulbFilled,
 } from '@ant-design/icons';
 import { Shield, Activity, Eye } from 'lucide-react';
 import { useCasesApi } from '@/services/api';
@@ -33,6 +37,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth();
+  const { themeMode, toggleTheme, isDark } = useTheme();
 
   // Fetch use cases count for navigation badge
   const { data: useCases } = useQuery({
@@ -138,11 +144,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       key: 'profile',
       icon: <UserOutlined />,
       label: 'Profile',
+      onClick: () => navigate('/profile'),
     },
     {
       key: 'settings',
       icon: <SettingOutlined />,
       label: 'Settings',
+      onClick: () => navigate('/settings'),
     },
     {
       type: 'divider',
@@ -151,6 +159,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       key: 'logout',
       icon: <LogoutOutlined />,
       label: 'Logout',
+      onClick: () => {
+        logout();
+        message.success('Déconnexion réussie');
+        navigate('/login');
+      },
     },
   ];
 
@@ -200,7 +213,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           )}
         </div>
-        
+
         {/* Search Section */}
         {!collapsed && (
           <div style={{ padding: '15px', background: 'var(--bg-light)', borderBottom: '1px solid var(--border)' }}>
@@ -215,21 +228,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
           </div>
         )}
-        
+
         <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
           <Menu
             theme="dark"
             mode="inline"
             selectedKeys={[getSelectedKey()]}
             items={menuItems}
-            style={{ 
+            style={{
               borderRight: 0,
               background: 'transparent',
               fontSize: '14px'
             }}
           />
         </div>
-        
+
         {/* Sidebar Footer */}
         {!collapsed && (
           <div style={{
@@ -274,10 +287,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 borderRadius: '8px',
               }}
             />
-            
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
+
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
               gap: '8px',
               color: 'var(--text)',
               fontSize: '14px',
@@ -302,7 +315,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
               New Use Case
             </Button>
-            
+
+            {/* Theme Toggle Button */}
+            <Button
+              type="text"
+              onClick={() => {
+                console.log('Clic sur bouton thème, mode actuel:', themeMode);
+                toggleTheme();
+              }}
+              style={{
+                color: 'var(--text)',
+                borderRadius: '8px',
+                fontSize: '18px',
+              }}
+              title={`Basculer vers le mode ${isDark ? 'clair' : 'sombre'}`}
+            >
+              {isDark ? '🌞' : '🌙'}
+            </Button>
+
             <Button
               type="text"
               icon={<BellOutlined />}
@@ -313,7 +343,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
               <Badge count={3} size="small" offset={[2, -2]} />
             </Button>
-            
+
             <Dropdown
               menu={{ items: userMenuItems }}
               placement="bottomRight"
@@ -339,12 +369,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Avatar
                   size="small"
                   icon={<UserOutlined />}
-                  style={{ 
-                    marginRight: 8, 
-                    background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' 
+                  style={{
+                    marginRight: 8,
+                    background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)'
                   }}
                 />
-                <span style={{ color: 'var(--text)', fontWeight: 500 }}>Admin User</span>
+                <span style={{ color: 'var(--text)', fontWeight: 500 }}>
+                  {user?.fullName || 'Admin User'}
+                </span>
               </div>
             </Dropdown>
           </div>

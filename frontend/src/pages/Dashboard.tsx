@@ -42,16 +42,17 @@ const Dashboard: React.FC = () => {
     retry: 1,
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
+    enabled: true, // Réactiver
   });
 
   // Fetch Wazuh status
   const { data: wazuhStatus, isLoading: wazuhLoading, error: wazuhError } = useQuery({
     queryKey: ['wazuh-status'],
     queryFn: () => wazuhApi.getStatus(),
-    refetchInterval: 30000, // Refetch every 30 seconds
     retry: 1,
     staleTime: 30 * 1000,
     refetchOnWindowFocus: false,
+    enabled: true, // Réactiver
   });
 
   // Calculate statistics with error safety

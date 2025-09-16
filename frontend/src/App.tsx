@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ConfigProvider, theme } from 'antd';
 import Layout from '@/components/Layout/Layout';
@@ -12,7 +12,13 @@ import Deployment from '@/pages/Deployment';
 import Community from '@/pages/Community';
 import WazuhStatus from '@/pages/WazuhStatus';
 import EnrichmentSettings from '@/pages/EnrichmentSettings';
+import Profile from '@/pages/Profile';
+import Settings from '@/pages/Settings';
+import Login from '@/pages/Login';
+import { useAuth } from '@/hooks/useAuth';
+import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 import './App.css';
+import './styles/theme-overrides.css';
 
 // Create a client for React Query
 const queryClient = new QueryClient({
@@ -27,38 +33,72 @@ const queryClient = new QueryClient({
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-          token: {
-            colorPrimary: '#00d4ff',
-            colorBgBase: '#0a0e27',
-            colorBgContainer: '#141829',
-            colorBorder: '#2a3050',
-            colorText: '#e4e4e7',
-            colorTextSecondary: '#9ca3af',
-            borderRadius: 8,
-          },
-        }}
-      >
+      <ThemeProvider>
         <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/usecases" element={<UseCases />} />
-              <Route path="/usecases/new" element={<UseCaseEditor />} />
-              <Route path="/usecases/:id" element={<UseCaseDetail />} />
-              <Route path="/usecases/:id/edit" element={<UseCaseEditor />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/deployment" element={<Deployment />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/wazuh" element={<WazuhStatus />} />
-              <Route path="/enrichment" element={<EnrichmentSettings />} />
-            </Routes>
-          </Layout>
+          <ThemedApp />
         </Router>
-      </ConfigProvider>
+      </ThemeProvider>
     </QueryClientProvider>
+  );
+};
+
+const ThemedApp: React.FC = () => {
+  const { getAntdTheme } = useTheme();
+
+  return (
+    <ConfigProvider theme={getAntdTheme()}>
+      <AppContent />
+    </ConfigProvider>
+  );
+};
+
+const AppContent: React.FC = () => {
+  const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+
+  // Show loading while checking auth
+  if (loading) {
+    return (
+      <div style={{
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#0a0e27'
+      }}>
+        <div>Loading Wazuh Platform...</div>
+      </div>
+    );
+  }
+
+  // Show login page if not authenticated and not already on login
+  if (!isAuthenticated && location.pathname !== '/login') {
+    return <Login />;
+  }
+
+  // Show login route or main app
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/usecases" element={<UseCases />} />
+            <Route path="/usecases/new" element={<UseCaseEditor />} />
+            <Route path="/usecases/:id" element={<UseCaseDetail />} />
+            <Route path="/usecases/:id/edit" element={<UseCaseEditor />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/deployment" element={<Deployment />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/wazuh" element={<WazuhStatus />} />
+            <Route path="/enrichment" element={<EnrichmentSettings />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      } />
+    </Routes>
   );
 };
 
