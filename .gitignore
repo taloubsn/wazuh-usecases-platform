@@ -126,6 +126,11 @@ TROUBLESHOOTING.md
 QUICK_START.md
 docker-compose.minimal.yml
 
+# Development scripts (local only)
+dev-push.py
+dev-*.py
+*-dev.py
+
 # Python virtual environments
 .venv/
 venv/
