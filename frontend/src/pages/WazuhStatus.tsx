@@ -70,16 +70,22 @@ const WazuhStatus: React.FC = () => {
   });
 
   // Extract agents from response - handle both array and object response formats
-  const agents: WazuhAgent[] = Array.isArray(agentsResponse)
+  const allAgents: WazuhAgent[] = Array.isArray(agentsResponse)
     ? agentsResponse
     : agentsResponse?.affected_items || [];
+
+  // Filter out the Wazuh manager (agent ID 000) to show only real agents
+  const agents: WazuhAgent[] = allAgents.filter(agent =>
+    agent.id !== '000' && agent.id !== 0 && agent.name !== 'wazuh-manager'
+  );
 
   console.log('🔥 Component state:', {
     statusLoading,
     hasStatus: !!wazuhStatus,
     connected: wazuhStatus?.connected,
     hasAgents: !!agents,
-    agentsCount: agents?.length || 0,
+    totalAgents: allAgents?.length || 0,
+    filteredAgents: agents?.length || 0,
     hasError: !!statusError
   });
 
@@ -331,8 +337,11 @@ const WazuhStatus: React.FC = () => {
             </Row>
           )}
 
-          {/* Agents Table */}
-          <Card title={`Wazuh Agents (${safeAgents.length})`}>
+          {/* Agents Table - Excludes Wazuh Manager (ID: 000) */}
+          <Card
+            title={`Wazuh Agents (${safeAgents.length})`}
+            extra={<Text type="secondary">Manager excluded from list</Text>}
+          >
             <Table
               dataSource={safeAgents}
               columns={agentColumns}
