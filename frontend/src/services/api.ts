@@ -155,56 +155,6 @@ export const searchApi = {
   },
 };
 
-// Deployment API
-export const deploymentApi = {
-  deploy: async (useCaseId: string, targetGroups?: string[]): Promise<{
-    success: boolean;
-    message: string;
-    deployment_id?: string;
-  }> => {
-    const response = await api.post(`/deployment/${useCaseId}/deploy`, {
-      target_groups: targetGroups
-    });
-    return response.data;
-  },
-
-  rollback: async (useCaseId: string): Promise<{
-    success: boolean;
-    message: string;
-  }> => {
-    const response = await api.post(`/deployment/${useCaseId}/rollback`);
-    return response.data;
-  },
-
-  getStatus: async (useCaseId: string): Promise<{
-    use_case_id: string;
-    deployment_status: string;
-    deployment_date?: string;
-    rollback_available: boolean;
-    target_groups: string[];
-    logs: DeploymentLog[];
-  }> => {
-    const response = await api.get(`/deployment/${useCaseId}/status`);
-    return response.data;
-  },
-
-  test: async (useCaseId: string): Promise<{
-    success: boolean;
-    message: string;
-    test_results: any[];
-    tested_at: string;
-  }> => {
-    const response = await api.post(`/deployment/${useCaseId}/test`);
-    return response.data;
-  },
-
-  getLogs: async (limit = 50, skip = 0): Promise<DeploymentLog[]> => {
-    const response = await api.get('/deployment/logs', {
-      params: { limit, skip }
-    });
-    return response.data;
-  },
-};
 
 // Wazuh API
 export const wazuhApi = {
@@ -307,6 +257,7 @@ export const wazuhApi = {
     });
     return response.data;
   },
+
 };
 
 // Community API

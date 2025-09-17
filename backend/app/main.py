@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api import usecases, search, deployment, community, wazuh, enrichment
+from app.api import usecases, search, community, wazuh, enrichment
 from app.database.database import Base, engine
 
 app = FastAPI(
@@ -31,7 +31,6 @@ app.add_middleware(
 # Include routers
 app.include_router(usecases.router, prefix="/api/v1/usecases", tags=["usecases"])
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
-app.include_router(deployment.router, prefix="/api/v1/deployment", tags=["deployment"])
 app.include_router(community.router, prefix="/api/v1/community", tags=["community"])
 app.include_router(wazuh.router, prefix="/api/v1/wazuh", tags=["wazuh"])
 app.include_router(enrichment.router, prefix="/api/v1/enrichment", tags=["enrichment"])

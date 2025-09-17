@@ -62,9 +62,9 @@ const Dashboard: React.FC = () => {
   const draftUseCases = Array.isArray(useCases) ? useCases.filter(uc => uc?.maturity === 'draft').length : 0;
 
   return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <Title level={2} style={{ margin: 0 }}>Dashboard</Title>
+    <div className="page-container">
+      <div className="page-header">
+        <Title level={2} className="page-title">Dashboard</Title>
         <Text type="secondary">Overview of your Wazuh use cases and platform status</Text>
       </div>
 
@@ -111,7 +111,7 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* Statistics Cards */}
-      <Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
+      <Row gutter={[24, 24]} className="section-spacing">
         <Col xs={24} sm={12} lg={6}>
           <Card className="dashboard-card" onClick={() => navigate('/usecases')}>
             <Statistic
@@ -158,7 +158,7 @@ const Dashboard: React.FC = () => {
       </Row>
 
       {/* Charts Row */}
-      <Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
+      <Row gutter={[24, 24]} className="section-spacing">
         <Col xs={24} lg={16}>
           <Card title="Alerts Trend (Last 7 Days)">
             <ResponsiveContainer width="100%" height={300}>

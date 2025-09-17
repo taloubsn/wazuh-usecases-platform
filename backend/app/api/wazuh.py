@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List, Dict, Any
+from pydantic import BaseModel
 from app.services.wazuh_service import WazuhService
 
 router = APIRouter()
+
 
 
 @router.get("/status")
@@ -204,3 +206,5 @@ async def get_manager_logs(
         return logs
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get logs: {str(e)}")
+
+

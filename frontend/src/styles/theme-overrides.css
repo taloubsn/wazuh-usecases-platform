@@ -24,9 +24,21 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Améliorer l'espacement du contenu principal */
+.app-content {
+  padding: 32px !important;
+  min-height: calc(100vh - 64px) !important;
+  overflow-x: hidden !important;
+}
+
 [data-theme="light"] .app-content {
   background: var(--bg-base) !important;
   color: var(--text) !important;
+}
+
+/* Mode sombre - espacement identique */
+[data-theme="dark"] .app-content {
+  padding: 32px !important;
 }
 
 /* Corrections pour les cards en mode clair */
@@ -83,4 +95,131 @@
 
 [data-theme="light"] .ant-table-tbody > tr:hover > td {
   background: var(--bg-light) !important;
+}
+
+/* Améliorer l'espacement des éléments du dashboard */
+.dashboard-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 16px !important;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Espacement pour les titres et sections */
+.ant-typography h1,
+.ant-typography h2,
+.ant-typography h3 {
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+/* Améliorer l'espacement des alertes */
+.ant-alert {
+  margin-bottom: 24px !important;
+}
+
+/* Espacement pour les Row et Col */
+.ant-row {
+  margin-bottom: 16px !important;
+}
+
+/* Navigation menu - améliorer l'espacement */
+.ant-menu-item {
+  margin-bottom: 4px !important;
+  border-radius: 8px !important;
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+  width: calc(100% - 16px) !important;
+}
+
+.ant-menu-item-group-title {
+  padding: 16px 24px 8px 24px !important;
+  font-weight: 600 !important;
+}
+
+/* Améliorer l'espacement de la sidebar */
+.app-sidebar {
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1) !important;
+  z-index: 10 !important;
+}
+
+/* Espacement entre sidebar et contenu */
+.ant-layout-has-sider > .ant-layout {
+  margin-left: 0 !important;
+}
+
+/* Header espacement */
+.app-header {
+  padding: 0 32px !important;
+  height: 64px !important;
+  line-height: 64px !important;
+}
+
+/* Ajustements pour les dividers du menu */
+.ant-menu-item-divider {
+  margin: 8px 16px !important;
+  background-color: var(--border) !important;
+}
+
+/* Améliorer l'espacement des groupes de menu */
+.ant-menu-item-group:not(:last-child) {
+  margin-bottom: 16px !important;
+}
+
+/* Style global pour toutes les pages */
+.page-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 32px !important;
+}
+
+.page-title {
+  margin: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Espacement cohérent pour les sections */
+.section-spacing {
+  margin-bottom: 32px !important;
+}
+
+/* Améliorer l'espacement des boutons d'action */
+.action-buttons {
+  margin-bottom: 24px !important;
+}
+
+/* Espacement pour les filtres */
+.filters-section {
+  margin-bottom: 24px !important;
+  padding: 20px !important;
+  background: var(--bg-container) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Responsive - espacement mobile */
+@media (max-width: 768px) {
+  .app-content {
+    padding: 16px !important;
+  }
+
+  .app-header {
+    padding: 0 16px !important;
+  }
+
+  .page-header {
+    margin-bottom: 24px !important;
+  }
+
+  .section-spacing {
+    margin-bottom: 24px !important;
+  }
 }

@@ -8,7 +8,6 @@ import UseCases from '@/pages/UseCases';
 import UseCaseEditor from '@/pages/UseCaseEditor';
 import UseCaseDetail from '@/pages/UseCaseDetail';
 import Search from '@/pages/Search';
-import Deployment from '@/pages/Deployment';
 import Community from '@/pages/Community';
 import WazuhStatus from '@/pages/WazuhStatus';
 import EnrichmentSettings from '@/pages/EnrichmentSettings';
@@ -89,7 +88,6 @@ const AppContent: React.FC = () => {
             <Route path="/usecases/:id" element={<UseCaseDetail />} />
             <Route path="/usecases/:id/edit" element={<UseCaseEditor />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/deployment" element={<Deployment />} />
             <Route path="/community" element={<Community />} />
             <Route path="/wazuh" element={<WazuhStatus />} />
             <Route path="/enrichment" element={<EnrichmentSettings />} />

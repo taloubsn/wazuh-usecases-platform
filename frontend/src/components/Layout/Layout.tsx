@@ -8,7 +8,6 @@ import {
   DashboardOutlined,
   FileTextOutlined,
   SearchOutlined,
-  DeploymentUnitOutlined,
   GlobalOutlined,
   SettingOutlined,
   UserOutlined,
@@ -93,17 +92,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       type: 'group',
       children: [
         {
-          key: '/deployment',
-          icon: <DeploymentUnitOutlined />,
-          label: (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span>Deployment</span>
-              <Activity size={12} color="var(--success)" />
-            </div>
-          ),
-          onClick: () => navigate('/deployment'),
-        },
-        {
           key: '/wazuh',
           icon: <SettingOutlined />,
           label: (
@@ -172,7 +160,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const path = location.pathname;
     if (path.startsWith('/usecases')) return '/usecases';
     if (path.startsWith('/search')) return '/search';
-    if (path.startsWith('/deployment')) return '/deployment';
     if (path.startsWith('/community')) return '/community';
     if (path.startsWith('/wazuh')) return '/wazuh';
     if (path.startsWith('/enrichment')) return '/enrichment';
